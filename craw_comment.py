@@ -14,6 +14,7 @@ browser = webdriver.Chrome(executable_path="./chromedriver")
 
 # mo fb
 browser.get("http://facebook.com")
+sleep(5)
 txtUser = browser.find_element_by_id("email")
 txtUser.send_keys("tuanhung0601@live.com") # <---  Điền username thật của các bạn vào đây
 sleep(random.randint(3, 5))
@@ -50,9 +51,16 @@ while(load_more==1):
         sleep(random.randint(5, 10))
     except:
         load_more = 0
-        print("Cant find the element")
+        print("No more comment to show")
 
-print("heloooooooo")
+sleep(random.randint(5, 10))
+comment_list = browser.find_elements_by_xpath("//li")
+
+
+for comment in comment_list:
+    poster = comment.find_element_by_class_name("0c111c07-53b6-490a-9193-f45b270bccfc")
+    content = comment.find_element_by_class_name("0c111c07-53b6-490a-9193-f45b270bccfc")
+    print("*", poster.text, ":", content.text)
 
 sleep(10)
 browser.close()
